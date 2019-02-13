@@ -132,6 +132,7 @@ namespace Application.Blog.WebApi.Controllers
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Name),
                 }),
+                Audience = "http://localhost:4200",
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key)
                     , SecurityAlgorithms.HmacSha512Signature)

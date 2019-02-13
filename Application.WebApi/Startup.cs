@@ -48,7 +48,9 @@ namespace Application.WebApi
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = true,
+                    ValidAudience = "http://localhost:4200",
+
                 };
             });
 
