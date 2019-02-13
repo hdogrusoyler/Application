@@ -39,6 +39,13 @@ namespace Application.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DataConnection"), b => b.MigrationsAssembly("Application.Blog.WebApi"));
+            });
+
+            services.AddCors();
+
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Appsettings:Token").Value);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -54,20 +61,12 @@ namespace Application.WebApi
                 };
             });
 
-            services.AddDirectoryBrowser();
-
-
             services.AddMvc().AddJsonOptions(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DataConnection"), b => b.MigrationsAssembly("Application.Blog.WebApi"));
-            });
-
-            services.AddCors();
+            services.AddDirectoryBrowser();
 
             services.AddScoped<IContentService, ContentManager>();
             services.AddScoped<IContentDal, EfContentDal>();
@@ -101,6 +100,7 @@ namespace Application.WebApi
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
 
             //app.UseStaticFiles(); // For the wwwroot folder
@@ -118,7 +118,6 @@ namespace Application.WebApi
             //    RequestPath = "/Images"
             //});
 
-            app.UseAuthentication();
         }
     }
 }

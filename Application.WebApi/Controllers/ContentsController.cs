@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Blog.WebApi.Models;
 using Application.Business.Abstract;
 using Application.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Blog.WebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ContentsController : Controller
     {

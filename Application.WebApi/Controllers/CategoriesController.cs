@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Business.Abstract;
 using Application.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Application.Blog.WebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
