@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Blog.WebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
