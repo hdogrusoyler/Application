@@ -63,7 +63,7 @@ namespace Application.Blog.WebApi.Controllers
             {
                 if (file.Length > 0)
                 {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Images", file.FileName);
+                    var path = Path.Combine(AppContext.BaseDirectory, "Images", file.FileName);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
@@ -99,7 +99,7 @@ namespace Application.Blog.WebApi.Controllers
             {
                 if (file.Length > 0)
                 {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Images", file.FileName);
+                    var path = Path.Combine(AppContext.BaseDirectory, "Images", file.FileName);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
